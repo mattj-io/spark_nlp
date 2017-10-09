@@ -1,23 +1,27 @@
 #!/usr/bin/env python
+"""
+Load data for demo
+"""
+
 import urllib2
 import json
 from kafka import KafkaProducer
 
 def main():
-
+    """
+    Load JSON from file into Kafka
+    """
     kafka_topic = 'ingest'
-    
+
     producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('utf-8'),
                              bootstrap_servers='localhost:9092')
-    
+
     data_url = 'https://raw.githubusercontent.com/mattj-io/spark_nlp/master/stack.json'
-    
+
     data_file = urllib2.urlopen(data_url)
 
     for line in data_file:
-            producer.send(kafka_topic, json.loads(line))
+        producer.send(kafka_topic, json.loads(line))
 
 if __name__ == "__main__":
-        main()
-
-
+    main()
