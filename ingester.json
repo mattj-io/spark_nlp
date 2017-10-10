@@ -1,4 +1,5 @@
 {
+  "id": "ingester",
   "instances": 1,
   "cpus": 0.1,
   "mem": 32,
