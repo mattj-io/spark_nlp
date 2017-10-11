@@ -3,5 +3,5 @@
   "instances": 1,
   "cpus": 0.1,
   "mem": 32,
-  "cmd": "curl -s -L https://github.com/dcos/demos/releases/download/0.1/preprocessor_linux -o preprocessor && chmod u+x preprocessor && ./preprocessor"
+  "cmd": "curl -s -L https://raw.githubusercontent.com/mattj-io/spark_nlp/master/preprocessor_linux -o preprocessor && chmod u+x preprocessor && ./preprocessor"
 }
