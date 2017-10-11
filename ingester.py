@@ -15,8 +15,8 @@ def main():
     kafka_topic = 'ingest'
 
     producer = KafkaProducer(value_serializer=lambda m: json.dumps(m).encode('utf-8'),
-                             bootstrap_servers='localhost:9092')
-    
+                             bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
+
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
