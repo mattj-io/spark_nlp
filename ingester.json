@@ -1,7 +1,9 @@
 {
   "id": "ingester",
-  "instances": 1,
-  "cpus": 0.1,
-  "mem": 32,
-  "cmd": "curl -s -L https://raw.githubusercontent.com/mattj-io/spark_nlp/master/ingester_linux -o ingester && chmod u+x ingester && ./ingester"
+  "description": "ingest test data",
+  "run": {
+    "cpus": 0.1,
+    "mem": 32,
+    "cmd": "curl -s -L https://raw.githubusercontent.com/mattj-io/spark_nlp/master/ingester_linux -o ingester && chmod u+x ingester && ./ingester"
+  }
 }
