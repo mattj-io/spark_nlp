@@ -12,8 +12,13 @@ from pyspark.sql.functions import *
 from pyspark.ml.linalg import Vectors, SparseVector
 from pyspark.ml.clustering import LDA, LDAModel, BisectingKMeans
 from pyspark.sql.functions import monotonically_increasing_id
-
 from pyspark.sql import SparkSession
+
+import sys
+import os
+if os.path.exists('libs.zip'):
+    sys.path.insert(0, 'libs.zip')
+
 from kafka import KafkaProducer
 
 producer = KafkaProducer(bootstrap_servers='localhost:9092')
