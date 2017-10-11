@@ -98,8 +98,8 @@ def main():
 
     consumer = KafkaConsumer('ingest', value_deserializer=lambda m: json.loads(m.decode('ascii')),
                              auto_offset_reset='earliest',
-                             bootstrap_servers='localhost:9092')
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+                             bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
+    producer = KafkaProducer(bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
 
     for message in consumer:
         question = message.value

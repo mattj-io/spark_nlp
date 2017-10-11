@@ -21,7 +21,7 @@ if os.path.exists('libs.zip'):
 
 from kafka import KafkaProducer
 
-producer = KafkaProducer(bootstrap_servers='localhost:9092')
+producer = KafkaProducer(bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
 
 spark = SparkSession \
     .builder \
@@ -30,7 +30,7 @@ spark = SparkSession \
 
 ################################################################################################
 
-rawdata = spark.read.format("kafka").option("kafka.bootstrap.servers", "localhost:9092") \
+rawdata = spark.read.format("kafka").option("kafka.bootstrap.servers", "broker.kafka.l4lb.thisdcos.directory:9092") \
         .option("subscribe", "pre-processed") \
         .load()
 
