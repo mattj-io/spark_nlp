@@ -5,12 +5,13 @@ pip install kafka
 pip install pyinstaller
 pyinstaller --onefile $pythonscript
 # Create libs zip - requires zip obvs
+install deps into venv as above
 cd venv/lib/python2.7/site-packages
 zip -r libs.zip numpy* kafka*
-# commands
+# demo commands
 dcos package install kafka
 dcos package install spark
-dcos kafka topic create
+dcos kafka topic create $topic
 dcos job add ingester.json 
 dcos job run ingester
 dcos marathon app add preprocessor.json
