@@ -3,5 +3,5 @@
   "instances": 1,
   "cpus": 0.1,
   "mem": 32,
-  "cmd": "curl -s -L https://github.com/mattj-io/spark_nlp/raw/master/ingester && chmod u+x ingester && ./ingester"
+  "cmd": "curl -s -L https://raw.githubusercontent.com/mattj-io/spark_nlp/master/ingester_linux -o ingester && chmod u+x ingester && ./ingester"
 }
