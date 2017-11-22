@@ -7,6 +7,7 @@ import json
 import re
 from HTMLParser import HTMLParser
 from kafka import KafkaConsumer, KafkaProducer
+import argparse
 
 class MLStripper(HTMLParser):
     """
@@ -96,10 +97,18 @@ def main():
     Preprocess from Kafka queue
     """
 
-    consumer = KafkaConsumer('ingest', value_deserializer=lambda m: json.loads(m.decode('ascii')),
+    parser = argparse.ArgumentParser(description="Preprocess Kafka data")
+    parser.add_argument("-b" "--broker", dest="kafka_broker", help="Kafka broker address", required=True)
+    parser.add_argument("-i", "--input-topic", dest="input_topic", help="Kafka input topic", default="ingest")
+    parser.add_argument("-o", "--output-topic", dest="output_topic", help="Kafka output topic", default="pre-processed")
+
+
+    args = parser.parse_args()
+
+    consumer = KafkaConsumer(args.input_topic, value_deserializer=lambda m: json.loads(m.decode('ascii')),
                              auto_offset_reset='earliest',
-                             bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
-    producer = KafkaProducer(bootstrap_servers='broker.kafka.l4lb.thisdcos.directory:9092')
+                             bootstrap_servers=args.kafka_broker)
+    producer = KafkaProducer(bootstrap_servers=args.kafka_broker)
 
     for message in consumer:
         question = message.value
@@ -121,7 +130,7 @@ def main():
             remove_numeric = re.sub(r'\w*\d\w*', '', remove_punc)
 	    # Remove stop words
             remove_stop = remove_stopwords(remove_numeric)
-            producer.send('pre-processed', remove_stop.encode('utf-8'))
+            producer.send(args.output_topic, remove_stop.encode('utf-8'))
         else:
             continue
 
